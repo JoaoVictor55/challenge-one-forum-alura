@@ -2,12 +2,33 @@ package com.br.alura.modelo;
 
 import java.time.LocalDateTime;
 
-public class Resposta {
+import com.br.alura.modelo.Topico;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+
+@Entity(name="Resposta")
+@Table(name="tbl_respostas")
+public class Resposta {
+	
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String mensagem;
+	
+	@ManyToOne
+	@JoinColumn(name="topico", referencedColumnName="id")
 	private Topico topico;
+	
 	private LocalDateTime dataCriacao = LocalDateTime.now();
+	
+	@ManyToOne
+	@JoinColumn(name="autor", referencedColumnName="id")
 	private Usuario autor;
 	private Boolean solucao = false;
 

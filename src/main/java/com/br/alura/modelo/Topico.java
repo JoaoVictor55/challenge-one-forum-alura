@@ -4,15 +4,42 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Topico {
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
+@Entity(name="Topico")
+@Table(name = "tbl_topicos")
+
+public class Topico {
+	
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String titulo;
 	private String mensagem;
 	private LocalDateTime dataCriacao = LocalDateTime.now();
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name="statusTopico")
 	private StatusTopico status = StatusTopico.NAO_RESPONDIDO;
+	
+	@ManyToOne
+	@JoinColumn(name="autor", referencedColumnName="id")
 	private Usuario autor;
+	
+	@ManyToOne
+	@JoinColumn(name="curso", referencedColumnName="id")
 	private Curso curso;
+	
+	@OneToMany(mappedBy="topico")//criando relacionamento bidirecional. Aqui Topico é a entidade referecing e a referência é controlada pela coluna "topico"
 	private List<Resposta> respostas = new ArrayList<>();
 
 	public Topico(String titulo, String mensagem, Curso curso) {

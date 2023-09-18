@@ -1,12 +1,26 @@
 package com.br.alura.modelo;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity(name="Curso")
+@Table(name="tbl_cursos")
 public class Curso {
 
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
-	private String categoria;
+	
+	@ManyToOne
+	@JoinColumn(name="categoria", referencedColumnName="id")
+	private Categoria categoria;
 
-	public Curso(String nome, String categoria) {
+	public Curso(String nome, Categoria categoria) {
 		this.nome = nome;
 		this.categoria = categoria;
 	}
@@ -52,11 +66,11 @@ public class Curso {
 		this.nome = nome;
 	}
 
-	public String getCategoria() {
+	public Categoria getCategoria() {
 		return categoria;
 	}
 
-	public void setCategoria(String categoria) {
+	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
 

@@ -27,6 +27,47 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		
+		<!-- Conexão com o BD-->
+		<dependency>
+      		<groupId>org.springframework.boot</groupId>
+      		<artifactId>spring-boot-starter-data-jpa</artifactId>
+    	</dependency>
+    		
+    	<!-- Ferramenta de migração-->
+    	<dependency>
+      		<groupId>org.flywaydb</groupId>
+      		<artifactId>flyway-core</artifactId>
+    	</dependency>
+    	<dependency>
+      		<groupId>org.flywaydb</groupId>
+      		<artifactId>flyway-mysql</artifactId>
+    	</dependency>
+		
+		
+		<!-- Permite que ao salvar, o servidor seja resetado-->
+		<dependency>
+      		<groupId>org.springframework.boot</groupId>
+      		<artifactId>spring-boot-devtools</artifactId>
+      		<scope>runtime</scope>
+      		<optional>true</optional>
+    	</dependency>
+		
+		
+		<!-- Driver do mysql-->
+		<dependency>
+      		<groupId>com.mysql</groupId>
+      		<artifactId>mysql-connector-j</artifactId>
+      		<scope>runtime</scope>
+    	</dependency>
+    	
+    	<!-- Para aplicação web rest com spring-->
+    	<dependency>
+      		<groupId>org.springframework.boot</groupId>
+      		<artifactId>spring-boot-starter-web</artifactId>
+    	</dependency>
+		
 	</dependencies>
 
 	<build>
