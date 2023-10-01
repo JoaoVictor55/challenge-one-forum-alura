@@ -1,4 +1,4 @@
-package com.br.alura.modelo;
+package com.br.alura.forum.modelo;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,6 +16,16 @@ public class Curso {
 	private Long id;
 	private String nome;
 	
+	private boolean ativo = true;
+	
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
+
 	@ManyToOne
 	@JoinColumn(name="categoria", referencedColumnName="id")
 	private Categoria categoria;
@@ -24,7 +34,14 @@ public class Curso {
 		this.nome = nome;
 		this.categoria = categoria;
 	}
-	
+
+	public Curso()
+	{
+		super();
+		
+		id = null;
+		nome = null;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

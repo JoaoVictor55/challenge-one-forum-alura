@@ -68,6 +68,13 @@
       		<artifactId>spring-boot-starter-web</artifactId>
     	</dependency>
 		
+		<!-- Validações com bean validation-->
+		<dependency>
+      		<groupId>org.springframework.boot</groupId>
+      		<artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+		
 	</dependencies>
 
 	<build>

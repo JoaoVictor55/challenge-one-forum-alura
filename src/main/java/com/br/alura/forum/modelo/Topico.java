@@ -1,8 +1,11 @@
-package com.br.alura.modelo;
+package com.br.alura.forum.modelo;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.br.alura.forum.domain.topico.DadosCadastrarNovoTopico;
+import com.br.alura.forum.domain.topico.DadosCadastroTopico;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,11 +28,13 @@ public class Topico {
 	private Long id;
 	private String titulo;
 	private String mensagem;
+	
+	
 	private LocalDateTime dataCriacao = LocalDateTime.now();
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name="statusTopico")
-	private StatusTopico status = StatusTopico.NAO_RESPONDIDO;
+	
+	private StatusTopico statusTopico = StatusTopico.NAO_RESPONDIDO;
 	
 	@ManyToOne
 	@JoinColumn(name="autor", referencedColumnName="id")
@@ -41,12 +46,21 @@ public class Topico {
 	
 	@OneToMany(mappedBy="topico")//criando relacionamento bidirecional. Aqui Topico é a entidade referecing e a referência é controlada pela coluna "topico"
 	private List<Resposta> respostas = new ArrayList<>();
-
-	public Topico(String titulo, String mensagem, Curso curso) {
+	
+	public Topico() {
+		
+		super();
+		autor = null;
+		curso = null;
+	}
+	
+	public Topico(String titulo, String mensagem, Curso curso, Usuario autor) {
 		this.titulo = titulo;
 		this.mensagem = mensagem;
 		this.curso = curso;
+		this.autor = autor;
 	}
+
 
 	@Override
 	public int hashCode() {
@@ -106,11 +120,11 @@ public class Topico {
 	}
 
 	public StatusTopico getStatus() {
-		return status;
+		return statusTopico;
 	}
 
 	public void setStatus(StatusTopico status) {
-		this.status = status;
+		this.statusTopico = status;
 	}
 
 	public Usuario getAutor() {

@@ -1,10 +1,14 @@
-package com.br.alura.modelo;
+package com.br.alura.forum.modelo;
+
+import com.br.alura.forum.domain.usuario.DadosAtualizacaoUsuarios;
+import com.br.alura.forum.domain.usuario.DadosCadastraisUsuario;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.Valid;
 
 @Entity(name="Usuario")
 @Table(name="tbl_usuarios")
@@ -15,7 +19,28 @@ public class Usuario {
 	private String nome;
 	private String email;
 	private String senha;
+	
+	private boolean ativo = true; 
 
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
+
+	public Usuario() {
+		super();
+	}
+	
+	public Usuario(DadosCadastraisUsuario dados) {
+		super();
+		this.nome = dados.nome();
+		this.email = dados.email();
+		this.senha = dados.senha();
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -71,6 +96,27 @@ public class Usuario {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public void excluir() {
+		
+		setAtivo(false);
+		
+	}
+
+	public void atualizar(@Valid DadosAtualizacaoUsuarios dados) {
+		
+		if(dados.nome() != null) {
+			this.nome = dados.nome();
+		}
+		if(dados.email() != null) {
+			this.email = dados.email();
+		}
+		
+		if(dados.senha() != null) {
+			this.senha = dados.senha();
+		}
+		
 	}
 
 }

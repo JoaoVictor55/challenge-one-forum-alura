@@ -1,6 +1,6 @@
 create table tbl_topicos(
 
-    id bigint,
+    id bigint not null auto_increment,
     titulo varchar(100) unique not null,
     mensagem varchar(255) unique not null,
     dataCriacao Date not null,
@@ -13,7 +13,7 @@ create table tbl_topicos(
 
 create table tbl_cursos(
 
-    id bigint,
+    id bigint not null auto_increment,
     nome varchar(100) not null unique,
     categoria bigint,
 
@@ -22,7 +22,7 @@ create table tbl_cursos(
 
 create table tbl_categorias(
 
-    id bigint,
+    id bigint not null auto_increment,
     nome varchar(100) not null unique,
 
     constraint categoriasPK primary key(id)
@@ -30,7 +30,7 @@ create table tbl_categorias(
 
 create table tbl_usuarios(
 
-    id bigint,
+    id bigint not null auto_increment,
     nome varchar(100) not null unique,
     email varchar(100) not null unique,
     senha varchar(100) not null,
@@ -40,7 +40,7 @@ create table tbl_usuarios(
 
 create table tbl_respostas(
 
-    id bigint,
+    id bigint not null auto_increment,
     mensagem varchar(255) not null,
     autor bigint not null,
     solucao boolean not null,
