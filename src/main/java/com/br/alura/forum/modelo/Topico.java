@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.br.alura.forum.domain.topico.DadosAtualizarTopico;
 import com.br.alura.forum.domain.topico.DadosCadastrarNovoTopico;
 import com.br.alura.forum.domain.topico.DadosCadastroTopico;
 
@@ -18,6 +19,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.Valid;
 
 @Entity(name="Topico")
 @Table(name = "tbl_topicos")
@@ -150,5 +152,7 @@ public class Topico {
 	public void setRespostas(List<Resposta> respostas) {
 		this.respostas = respostas;
 	}
+
+
 
 }

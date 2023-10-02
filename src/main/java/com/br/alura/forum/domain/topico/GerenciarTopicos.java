@@ -13,6 +13,8 @@ import com.br.alura.forum.repository.CursoRepository;
 import com.br.alura.forum.repository.RespostaRepository;
 import com.br.alura.forum.repository.TopicosRepository;
 
+import jakarta.validation.Valid;
+
 @Service
 public class GerenciarTopicos {
 
@@ -62,6 +64,32 @@ public class GerenciarTopicos {
 		 
 		return topicoRepository.getReferenceById(id);
 		
+	}
+
+	public DadosDetalhamentoTopico atualizar(@Valid DadosAtualizarTopico dados) {
+		
+		//Curso curso = ;
+		
+		Topico topico = topicoRepository.getReferenceById(dados.id());
+		
+		if(dados.curso() != null) {
+			
+			topico.setCurso(cursoRepository.getReferenceById(dados.curso()));
+		}
+			
+		if(dados.mensagem() != null) {
+			
+			topico.setMensagem(dados.mensagem());
+		}
+		
+		if(dados.titulo() != null) {
+			
+			topico.setTitulo(dados.titulo());
+		}
+		
+		
+		
+		return new DadosDetalhamentoTopico(topico);
 	}
 	
 

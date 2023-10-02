@@ -12,15 +12,19 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.br.alura.forum.domain.topico.DadosAtualizarReferenciasTopico;
+import com.br.alura.forum.domain.topico.DadosAtualizarTopico;
 import com.br.alura.forum.domain.topico.DadosCadastroTopico;
 import com.br.alura.forum.domain.topico.DadosDetalhamentoTopico;
 import com.br.alura.forum.domain.topico.DadosListagemTopico;
 import com.br.alura.forum.domain.topico.GerenciarTopicos;
+import com.br.alura.forum.modelo.Topico;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -72,9 +76,25 @@ public class TopicoController {
 	public ResponseEntity <Page<DadosListagemTopico>> listar(@PageableDefault(size=10, sort= {"id"}, direction=Sort.Direction.ASC) Pageable paginacao,
 			@PathVariable String curso){
 		
-		System.out.println(curso);
+		//System.out.println(curso);
 		Page<DadosListagemTopico> page = gerenTopicos.findTopicoPorCurso(paginacao, curso);
 		
 		return ResponseEntity.ok(page);
+	}
+	
+	@PutMapping
+	@Transactional
+	public ResponseEntity atualizar(@RequestBody @Valid DadosAtualizarTopico dados) {
+		
+		System.out.println(dados);
+		
+		DadosDetalhamentoTopico detalhes = gerenTopicos.atualizar(dados);
+		
+		//System.out.println(detalhes);
+		
+		return ResponseEntity.ok(detalhes);
+
+		
+		
 	}
 }
